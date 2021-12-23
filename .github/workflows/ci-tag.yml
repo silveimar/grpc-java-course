@@ -16,20 +16,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo "Building tag $GITHUB_REF"
 
-    - name: Build with Gradle
-      run: ./gradlew build
-      env:
-        ARTIFACT_USERNAME: ${{ secrets.GIT_USER }}
-        ARTIFACT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
-    - name: Publish version
-      run: echo "Building tag $GITHUB_REF"
